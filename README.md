@@ -1,3 +1,12 @@
+---
+title: Sora2API
+emoji: 🎬
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+pinned: false
+---
+
 # Sora2API
 
 <div align="center">
