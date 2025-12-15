@@ -1,5 +1,5 @@
 // API routes for Deno - OpenAI compatible endpoints
-import { Router, Middleware } from "oak";
+import { Router } from "https://deno.land/x/oak@v12.6.1/mod.ts";
 import { verifyApiKeyHeader } from "../core/auth.ts";
 import { ChatCompletionRequest, ChatCompletionResponse, ModelsResponse, ModelInfo } from "../core/models.ts";
 import { GenerationHandler, MODEL_CONFIG } from "../services/generation_handler.ts";

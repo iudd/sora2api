@@ -3,7 +3,6 @@
     "oak": "https://deno.land/x/oak@v12.6.1/mod.ts",
     "cors": "https://deno.land/x/cors@v1.2.2/mod.ts",
     "dotenv": "https://deno.land/std@0.208.0/dotenv/mod.ts",
-    "postgres": "https://deno.land/x/postgres@v0.17.0/mod.ts",
     "bcrypt": "https://deno.land/x/bcrypt@v0.4.1/mod.ts",
     "jwt": "https://deno.land/x/djwt@v3.0.2/mod.ts",
     "base64": "https://deno.land/std@0.208.0/encoding/base64.ts",
@@ -11,7 +10,8 @@
     "delay": "https://deno.land/std@0.208.0/async/delay.ts",
     "path": "https://deno.land/std@0.208.0/path/mod.ts",
     "fs": "https://deno.land/std@0.208.0/fs/mod.ts",
-    "stream": "https://deno.land/std@0.208.0/streams/mod.ts"
+    "stream": "https://deno.land/std@0.208.0/streams/mod.ts",
+    "toml": "https://deno.land/std@0.208.0/toml/parse.ts"
   },
   "tasks": {
     "start": "deno run --allow-net --allow-read --allow-write --allow-env --allow-run main.ts",

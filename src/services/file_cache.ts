@@ -1,6 +1,6 @@
 // File cache service for Deno
-import { join } from "https://deno.land/std@0.208.0/path/mod.ts";
-import { ensureDir } from "https://deno.land/std@0.208.0/fs/mod.ts";
+import { join } from "https://deno.land/std@0.208.0/path/join.ts";
+import { ensureDir } from "https://deno.land/std@0.208.0/fs/ensure_dir.ts";
 import { config } from "../core/config.ts";
 
 interface CacheEntry {

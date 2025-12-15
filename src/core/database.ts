@@ -1,9 +1,8 @@
 // Database management for Deno
-import { Client } from "postgres";
 import { join } from "https://deno.land/std@0.208.0/path/mod.ts";
 import { ensureDir } from "https://deno.land/std@0.208.0/fs/mod.ts";
-import { hash, compare } from "bcrypt";
-import { create, verify } from "jwt";
+import { hash, compare } from "https://deno.land/x/bcrypt@v0.4.1/mod.ts";
+import { create, verify } from "https://deno.land/x/djwt@v3.0.2/mod.ts";
 import { config } from "./config.ts";
 
 // Database file paths

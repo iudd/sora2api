@@ -1,5 +1,5 @@
 // Admin routes for Deno
-import { Router } from "oak";
+import { Router } from "https://deno.land/x/oak@v12.6.1/mod.ts";
 import { verifyAdminToken } from "../core/auth.ts";
 import { TokenManager } from "../services/token_manager.ts";
 import { ProxyManager } from "../services/proxy_manager.ts";

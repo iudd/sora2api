@@ -1,5 +1,5 @@
 // Configuration management for Deno
-import { parse } from "https://deno.land/std@0.208.0/toml/mod.ts";
+import { parse } from "https://deno.land/std@0.208.0/toml/parse.ts";
 import { join } from "https://deno.land/std@0.208.0/path/mod.ts";
 
 export class Config {

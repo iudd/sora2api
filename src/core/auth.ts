@@ -1,5 +1,5 @@
 // Authentication middleware for Deno
-import { Middleware } from "oak";
+import { Middleware } from "https://deno.land/x/oak@v12.6.1/mod.ts";
 import { verifyJWT } from "./database.ts";
 
 export const verifyApiKeyHeader: Middleware = async (ctx, next) => {

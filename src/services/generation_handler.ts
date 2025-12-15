@@ -7,8 +7,8 @@ import { ConcurrencyManager } from "./concurrency_manager.ts";
 import { Database, Task, RequestLog } from "../core/database.ts";
 import { config } from "../core/config.ts";
 import { ChatCompletionRequest, ChatCompletionResponse, GenerationRequest } from "../core/models.ts";
-import { join } from "https://deno.land/std@0.208.0/path/mod.ts";
-import { ensureDir } from "https://deno.land/std@0.208.0/fs/mod.ts";
+import { join } from "https://deno.land/std@0.208.0/path/join.ts";
+import { ensureDir } from "https://deno.land/std@0.208.0/fs/ensure_dir.ts";
 
 export interface ModelConfig {
   type: "image" | "video";
