@@ -6,7 +6,7 @@ import { ProxyManager } from "../services/proxy_manager.ts";
 import { Database } from "../core/database.ts";
 import { GenerationHandler } from "../services/generation_handler.ts";
 import { ConcurrencyManager } from "../services/concurrency_manager.ts";
-import { send } from "https://deno.land/std@0.208.0/http/file_server.ts";
+import { send } from "https://deno.land/x/oak@v12.6.1/send.ts";
 
 const router = new Router();
 

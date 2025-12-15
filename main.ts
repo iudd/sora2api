@@ -2,7 +2,7 @@
 import { Application } from "https://deno.land/x/oak@v12.6.1/mod.ts";
 import { oakCors } from "https://deno.land/x/cors@v1.2.2/mod.ts";
 import { load } from "https://deno.land/std@0.208.0/dotenv/mod.ts";
-import { send } from "https://deno.land/std@0.208.0/http/file_server.ts";
+import { send } from "https://deno.land/x/oak@v12.6.1/send.ts";
 import { config } from "./src/core/config.ts";
 import { Database } from "./src/core/database.ts";
 import { TokenManager } from "./src/services/token_manager.ts";
