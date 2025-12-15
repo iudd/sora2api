@@ -50,12 +50,12 @@ apiRoutes.setGenerationHandler(generationHandler);
 adminRoutes.setDependencies(tokenManager, proxyManager, db, generationHandler, concurrencyManager);
 
 // API Router
-const apiRouter = Router();
+const apiRouter = new Router();
 apiRouter.use("/v1/models", apiRoutes.listModels);
 apiRouter.use("/v1/chat/completions", apiRoutes.chatCompletions);
 
 // Admin Router
-const adminRouter = Router();
+const adminRouter = new Router();
 adminRouter.get("/login", adminRoutes.loginPage);
 adminRouter.get("/manage", adminRoutes.managePage);
 adminRouter.post("/api/login", adminRoutes.login);
