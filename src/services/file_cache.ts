@@ -1,6 +1,4 @@
 // File cache service for Deno
-import { join } from "https://deno.land/std@0.208.0/path/join.ts";
-import { ensureDir } from "https://deno.land/std@0.208.0/fs/ensure_dir.ts";
 import { config } from "../core/config.ts";
 
 interface CacheEntry {
@@ -28,7 +26,7 @@ export class FileCache {
     if (!this.isDenoDeploy) {
       try {
         // Use a simpler approach to create the cache directory
-        const cacheDir = join(Deno.cwd(), "cache");
+        const cacheDir = `${Deno.cwd()}/cache`;
         await Deno.mkdir(cacheDir, { recursive: true });
       } catch (e) {
         // Ignore errors in Deno Deploy, just disable cache
@@ -99,7 +97,7 @@ export class FileCache {
 
     // Generate a unique filename
     const filename = `${key.replace(/[^a-zA-Z0-9]/g, "_")}_${Date.now()}`;
-    const path = join(Deno.cwd(), "cache", filename);
+    const path = `${Deno.cwd()}/cache/${filename}`;
 
     // Save the file
     await Deno.writeFile(path, data);
