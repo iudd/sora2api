@@ -26,10 +26,12 @@ export class FileCache {
     
     // Only try to create cache directory if we're not in Deno Deploy
     if (!this.isDenoDeploy) {
-      const cacheDir = join(Deno.cwd(), "cache");
       try {
-        await ensureDir(cacheDir);
+        // Use a simpler approach to create the cache directory
+        const cacheDir = join(Deno.cwd(), "cache");
+        await Deno.mkdir(cacheDir, { recursive: true });
       } catch (e) {
+        // Ignore errors in Deno Deploy, just disable cache
         console.warn("Could not create cache directory, running without file cache:", e.message);
       }
     }
