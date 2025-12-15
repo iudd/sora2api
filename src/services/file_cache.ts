@@ -14,10 +14,15 @@ export class FileCache {
   private cacheMap: Map<string, CacheEntry> = new Map();
   private cleanupInterval?: number;
   private isDenoDeploy: boolean;
+  private initialized: boolean = false;
 
   constructor() {
     // Check if we're in Deno Deploy environment (no write access to fs)
     this.isDenoDeploy = Deno.env.get("DENO_DEPLOYMENT_ID") !== undefined;
+  }
+
+  async init(): Promise<void> {
+    if (this.initialized) return;
     
     // Only try to create cache directory if we're not in Deno Deploy
     if (!this.isDenoDeploy) {
@@ -28,6 +33,8 @@ export class FileCache {
         console.warn("Could not create cache directory, running without file cache:", e.message);
       }
     }
+    
+    this.initialized = true;
   }
 
   async startCleanupTask(): Promise<void> {

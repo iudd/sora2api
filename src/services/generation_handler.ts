@@ -93,6 +93,11 @@ export class GenerationHandler {
     this.fileCache = new FileCache();
   }
 
+  async init(): Promise<void> {
+    await this.fileCache.init();
+    await this.fileCache.startCleanupTask();
+  }
+
   async *handleChatCompletion(
     request: ChatCompletionRequest,
     requestId: string

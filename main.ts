@@ -42,6 +42,9 @@ const generationHandler = new GenerationHandler(
   concurrencyManager
 );
 
+// Initialize generation handler
+await generationHandler.init();
+
 // Set dependencies for route modules
 apiRoutes.setGenerationHandler(generationHandler);
 adminRoutes.setDependencies(tokenManager, proxyManager, db, generationHandler, concurrencyManager);
@@ -191,9 +194,6 @@ async function initializeApp() {
   const allTokens = await db.getAllTokens();
   await concurrencyManager.initialize(allTokens);
   console.log(`✓ Concurrency manager initialized with ${allTokens.length} tokens`);
-  
-  // Start file cache cleanup task
-  await generationHandler.fileCache.startCleanupTask();
   
   console.log("✓ Sora2API initialization complete");
 }
