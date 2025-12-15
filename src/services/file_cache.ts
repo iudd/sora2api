@@ -11,17 +11,23 @@ interface CacheEntry {
 }
 
 export class FileCache {
-  private cacheDir: string;
   private cacheMap: Map<string, CacheEntry> = new Map();
   private cleanupInterval?: number;
+  private isDenoDeploy: boolean;
 
   constructor() {
-    this.cacheDir = join(Deno.cwd(), "cache");
-    this.ensureCacheDir();
-  }
-
-  private async ensureCacheDir(): Promise<void> {
-    await ensureDir(this.cacheDir);
+    // Check if we're in Deno Deploy environment (no write access to fs)
+    this.isDenoDeploy = Deno.env.get("DENO_DEPLOYMENT_ID") !== undefined;
+    
+    // Only try to create cache directory if we're not in Deno Deploy
+    if (!this.isDenoDeploy) {
+      const cacheDir = join(Deno.cwd(), "cache");
+      try {
+        await ensureDir(cacheDir);
+      } catch (e) {
+        console.warn("Could not create cache directory, running without file cache:", e.message);
+      }
+    }
   }
 
   async startCleanupTask(): Promise<void> {
@@ -38,7 +44,7 @@ export class FileCache {
   }
 
   async get(key: string): Promise<string | null> {
-    if (!config.cacheEnabled) {
+    if (!config.cacheEnabled || this.isDenoDeploy) {
       return null;
     }
 
@@ -47,7 +53,7 @@ export class FileCache {
       return null;
     }
 
-    // Check if the file is still valid (not expired)
+    // Check if the entry is still valid (not expired)
     const now = Date.now();
     const timeoutMs = config.cacheTimeout * 1000;
     
@@ -78,13 +84,13 @@ export class FileCache {
   }
 
   async set(key: string, url: string, data: Uint8Array): Promise<string> {
-    if (!config.cacheEnabled) {
+    if (!config.cacheEnabled || this.isDenoDeploy) {
       return "";
     }
 
     // Generate a unique filename
     const filename = `${key.replace(/[^a-zA-Z0-9]/g, "_")}_${Date.now()}`;
-    const path = join(this.cacheDir, filename);
+    const path = join(Deno.cwd(), "cache", filename);
 
     // Save the file
     await Deno.writeFile(path, data);
@@ -101,7 +107,7 @@ export class FileCache {
   }
 
   async cleanup(): Promise<void> {
-    if (!config.cacheEnabled) {
+    if (!config.cacheEnabled || this.isDenoDeploy) {
       return;
     }
 
