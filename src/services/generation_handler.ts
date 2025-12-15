@@ -93,10 +93,10 @@ export class GenerationHandler {
     this.fileCache = new FileCache();
   }
 
-  async handleChatCompletion(
+  async *handleChatCompletion(
     request: ChatCompletionRequest,
     requestId: string
-  ): Promise<AsyncGenerator<ChatCompletionResponse>> {
+  ): AsyncGenerator<ChatCompletionResponse> {
     const startTime = Date.now();
     let tokenUsed: string | null = null;
     let resultUrl: string | null = null;
