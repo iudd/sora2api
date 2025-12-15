@@ -282,21 +282,22 @@ export class Database {
     
     return await create({ alg: "HS256", typ: "JWT" }, payload, key);
   }
+}
 
-  async verifyJWT(token: string): Promise<Record<string, any> | null> {
-    // In a real implementation, use the same secret as above
-    const key = await crypto.subtle.importKey(
-      "raw",
-      new TextEncoder().encode("your-secret-key"),
-      { name: "HMAC", hash: "SHA-256" },
-      false,
-      ["sign", "verify"]
-    );
-    
-    try {
-      return await verify(token, key);
-    } catch {
-      return null;
-    }
+// JWT verification function (exported separately)
+export async function verifyJWT(token: string): Promise<Record<string, any> | null> {
+  // In a real implementation, use the same secret as above
+  const key = await crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode("your-secret-key"),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign", "verify"]
+  );
+  
+  try {
+    return await verify(token, key);
+  } catch {
+    return null;
   }
 }
